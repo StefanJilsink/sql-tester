@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SQL tester</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/packages/bulma/css/bulma.min.css">
+</head>
+<body>
+
+    <section class="section">
+        <div class="container">
+            <form>
+                <h1 class="title">SQL tester</h1>
+                <p class="subtitle">Try out all SQL statements on a 'in-memory' sqlite DB</p>
+                <div class="field">
+                    <label for="sql">SQL</label>
+                    <div class="control">
+                        <textarea class="textarea" placeholder="SELECT * FROM ..." id="sql" rows="5"></textarea>
+                    </div>
+                    <div class="help is-danger" id="error"></div>
+                    <div class="help is-success" id="response"></div>
+                </div>
+                <div class="control">
+                    <button class="button is-primary">Execute</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script src="/packages/jquery/dist/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      $('form').submit(function(e){
+        e.preventDefault();
+        socket.emit('sql query', $('#sql').val());
+        $('#sql').val('');
+        return false;
+      });
+      socket.on('sql error', function(error) {
+        $('#error').text(error);
+        $('#response').text('');
+      });
+      socket.on('sql response', function(response) {
+        $('#error').text('');
+        $('#response').text(response);
+      });
+    </script>
+</body>
+</html>

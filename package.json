@@ -1,0 +1,21 @@
+{
+  "name": "sql-tester",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node index.js",
+    "debug": "DEBUG=socket.io* node index.js"
+  },
+  "author": "Stefan Jilsink",
+  "respository": "https://github.com/StefanJilsink/sql-tester",
+  "license": "ISC",
+  "dependencies": {
+    "bulma": "^0.8.0",
+    "express": "^4.17.1",
+    "jquery": "^3.4.1",
+    "openurl": "^1.1.1",
+    "socket.io": "^2.3.0",
+    "sqlite3": "^4.1.1"
+  }
+}
